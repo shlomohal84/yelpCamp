@@ -1,3 +1,8 @@
+if (process.env.NODE_ENV !== "production") {
+	require('dotenv').config();
+};
+
+
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const Campground = require('../models/campground');
@@ -5,11 +10,11 @@ const Review = require('../models/review');
 const cities = require('./cities')
 const { places, descriptors } = require('./seedHelpers')
 const lorem = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, eaque facilis a perferendis laboriosam odio. Itaque pariatur labore eum perspiciatis dolorem quae minima nesciunt velit dolor. Dolor dignissimos eos dolorem!"
-mongoose.connect('mongodb://127.0.0.1:27017/yelpCamp', {
-	// useNewUrlParser: true,
-	// useCreateIndex: true,
-	// useUnifiedToplogy: true
-});
+
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelpCamp'
+mongoose.connect(dbUrl);
+
+// mongoose.connect('mongodb://127.0.0.1:27017/yelpCamp');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error:\n'));
