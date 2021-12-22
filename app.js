@@ -2,7 +2,7 @@ if (process.env.NODE_ENV !== "production") {
 	require('dotenv').config();
 };
 
-const port = 3000;
+
 const express = require('express');
 const path = require('path')
 const mongoose = require('mongoose');
@@ -151,5 +151,6 @@ app.use((err, req, res, next) => {
 })
 
 //
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Serving on port ${port}`))
 //
